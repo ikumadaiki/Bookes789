@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.last_week_rank
+    @books = Book.all
     @book = Book.new
   end
 
