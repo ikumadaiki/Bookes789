@@ -1,0 +1,43 @@
+<h2>投稿数の前日比・前週比</h2>
+
+<table class="table table-bordered my-2">
+  <thead>
+    <tr>
+      <th>今日の投稿数</th>
+      <th>昨日の投稿数</th>
+      <th>前日比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= user.books.created_today.count %></td>
+      <td><%= user.books.created_yesterday.count %></td>
+      <% if user.books.created_yesterday.exists? %>
+      <td><%= user.books.created_today.count/(user.books.created_yesterday.count)*100 %> %</td>
+      <% else %>
+      <td>比較不能</td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-bordered my-2">
+  <thead>
+    <tr>
+      <th>先週の投稿数</th>
+      <th>今週の投稿数</th>
+      <th>先週比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= user.books.created_this_week.count %></td>
+      <td><%= user.books.created_last_week.count %></td>
+      <% if user.books.created_last_week.exists? %>
+      <td><%= user.books.created_this_week.count/(user.books.created_last_week.count)*100 %> %</td>
+      <% else %>
+      <td>比較不能</td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
