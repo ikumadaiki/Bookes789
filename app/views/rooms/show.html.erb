@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1><%= @opponent.name %>さんとのチャット</h1>
+
+      <% if @messages.present? %>
+        <table class="table table-borderless m-3">
+          <% @messages.each do |message| %>
+            <% if message.user== @opponent %>
+              <tr>
+                <td><div class="bg-secondary text-light py-3 d-flex justify-content-center"><%= message.content %></div></td>
+                <td></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td></td>
+                <td><div class="bg-primary text-light py-3 d-flex justify-content-center"><%= message.content %></div></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      <% else %>
+        <div class="m-3 d-flex justify-content-center">メッセージはまだありません</div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @message, url: messages_path, local: true do |f| %>
+        <div class="form-group">
+          <%= f.text_field :content, placeholder: "メッセージを入力して下さい", class:"form-control" %>
+        </div>
+        <%= f.hidden_field :room_id, value: @room.id%>
+        <div class="form-group">
+          <%= f.submit "メッセージを送信", class:"btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
