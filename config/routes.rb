@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root :to =>"homes#top"
   get "home/about"=>"homes#about"
-
+  get "number_of_post" => "searches#get_number_of_post", as:"number_of_post"
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
