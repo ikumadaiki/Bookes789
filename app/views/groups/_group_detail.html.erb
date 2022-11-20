@@ -1,0 +1,45 @@
+<h2>Group Detail</h2>
+<table class="table">
+  <thead>
+    <th></th>
+    <th>グループ名</th>
+    <th>紹介文</th>
+    <th>メンバー</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= link_to group_path(group.id) do %>
+          <%= image_tag group.get_group_image, size:"40x40" %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to group.name, group_path(group.id) %>
+      </td>
+      <td>
+        <%= group.introduction %>
+      </td>
+      <td>
+        <% group.group_users.each do |group_user| %>
+          <%=group_user.user.name %> <br>
+        <% end %>
+      </td>
+      <td>
+        <% if current_user.id==group.owner_id %>
+          <%= link_to "Edit", edit_group_path(group), class:"btn btn-success" %>
+        <% elsif group.user_join?(current_user) %>
+          <%= link_to "Leave the group", group_group_users_path(group_id: group.id), method: :delete, class:"btn btn-danger" %>
+        <% else %>
+          <%= link_to "Join the group", group_group_users_path(group_id: group.id), method: :post, class: "btn btn-success" %>
+        <% end %>
+      </td>
+      <td>
+        <% if current_user.id==group.owner_id %>
+          <%= link_to "Notice an Event", group_new_mail_path(group_id: group.id), class:"btn btn-info mx-2" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
