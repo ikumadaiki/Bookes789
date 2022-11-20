@@ -1,0 +1,61 @@
+<h2>7日間分の投稿</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <% 6.step(0,-1) do |i| %>
+        <% if i == 0 %>
+          <th>今日</th>
+        <% else %>
+          <th><%= i %>日前</th>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% 6.step(0,-1) do |i| %>
+        <td><%= user.books.n_day_before(i).count %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<canvas id="myLineChart"></canvas>
+  <script>
+      $(document).on('turbolinks:load', function() {
+      var ctx = document.getElementById("myLineChart");
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
+          datasets: [
+            {
+              label: '投稿した本の数',
+              data: [<%= user.books.n_day_before(6).count %>, <%= user.books.n_day_before(5).count %>, <%= user.books.n_day_before(4).count %>, <%= user.books.n_day_before(3).count %>, <%= user.books.n_day_before(2).count %>, <%= user.books.n_day_before(1).count %>, <%= user.books.n_day_before(0).count%>],
+              borderColor: "rgba(0,0,255,1)",
+              backgroundColor: "rgba(0,0,0,0)"
+            }
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: '7日間の投稿数の比較'
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                suggestedMax: 10,
+                suggestedMin: 0,
+                stepSize: 1,
+                callback: function(value, index, values){
+                  return  value
+                }
+              }
+            }]
+          },
+        }
+      });
+    });
+  </script>

@@ -36,4 +36,8 @@ class Book < ApplicationRecord
       Book.where('title LIKE ?', '%'+content+'%')
     end
   end
+
+  def self.n_day_before(n)
+    return self.where(created_at: n.day.ago.all_day)
+  end
 end

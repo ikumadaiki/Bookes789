@@ -20,3 +20,5 @@ ActiveStorage.start()
 
 global.$ = jQuery;
 window.$ = jQuery;
+import Chart from "chart.js/auto";
+global.Chart = Chart;
