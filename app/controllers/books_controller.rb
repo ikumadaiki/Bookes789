@@ -15,6 +15,9 @@ class BooksController < ApplicationController
     else
       @books=Book.all.last_week_rank
     end
+    if params[:category]
+      @books = Book.where(category: params[:category])
+    end
     @book = Book.new
   end
 
@@ -49,7 +52,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :evaluation)
+    params.require(:book).permit(:title, :body, :evaluation,:category)
   end
 
   def ensure_correct_user

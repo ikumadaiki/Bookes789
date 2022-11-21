@@ -7,8 +7,10 @@ class SearchesController < ApplicationController
 		@method = params[:method]
 		if @model == 'user'
 			@records = User.search_for(@content, @method)
-		else
+		elsif @model == "book"
 			@records = Book.search_for(@content, @method)
+		else
+			@records = Book.where(category: @content)
 		end
 	end
 end

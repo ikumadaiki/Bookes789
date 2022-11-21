@@ -12,6 +12,10 @@
           <label for="book_opinion">Opinion</label>
           <%= f.text_area :body, autofocus:true,class:"form-control", id:"book_opinion", placeholder:"Opinion" %>
         </div>
+            <div class="form-group">
+          <label for="book_category">Category</label>
+          <%= f.text_field :category, class:"form-control" %>
+        </div>
         <div class="movie-evaluation my-3" data-score="<%= @book.evaluation %>"></div>
         <div class="form-group">
           <%= f.submit "Update Book",class:"btn btn-success" %>
