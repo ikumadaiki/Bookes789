@@ -20,7 +20,25 @@
             <%= render "favorites/btn", book: book %>
         </td>
         <td><%= render "book_comments/counter", book: book %></td>
+        <td class="movie-evaluation" data-score="<%= book.evaluation %>"></td>
+
+      </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<!--評価用のjqueryコード-->
+
+<script>
+// 一度空にしてから表示することでブラウザバックでのエラーが防げる
+// ブラウザバックすると前のjqueryのアクションとブラウザバックしたあとのjqueryのアクションが重なる
+  $('.movie-evaluation').empty();
+  $('.movie-evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>

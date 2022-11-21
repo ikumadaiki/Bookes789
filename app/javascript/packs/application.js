@@ -20,3 +20,4 @@ ActiveStorage.start()
 
 global.$ = jQuery;
 window.$ = jQuery;
+require('packs/raty')
